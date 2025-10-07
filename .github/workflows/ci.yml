@@ -2,32 +2,39 @@ name: CI Tests
 
 on:
   push:
-    branches: [ main ]
+    branches: [main]
   pull_request:
-    branches: [ main ]
+    branches: [main]
 
 jobs:
   run-tests:
     runs-on: ubuntu-latest
+
     steps:
+      # Step 1: Checkout the repository
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Setup Node
+      # Step 2: Setup Node.js 20
+      - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 20
 
+      # Step 3: Install dependencies
       - name: Install dependencies
         run: npm ci
 
+      # Step 4: Start the server in background
       - name: Start server
         run: |
           npx serve . -l 5500 &
           sleep 5
 
+      # Step 5: Run Jest tests
       - name: Run Jest tests
         run: npm run test:jest
 
+      # Step 6: Run Cypress tests
       - name: Run Cypress tests
         run: npm run test:cypress
