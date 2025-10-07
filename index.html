@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Mini App</title>
+  </head>
+  <body>
+    <h1>Welcome to Mini App</h1>
+    <input id="name" placeholder="Enter your name" />
+    <button id="btn">Say Hello</button>
+    <p id="msg"></p>
+
+    <script>
+      document.getElementById("btn").addEventListener("click", () => {
+        const name = document.getElementById("name").value.trim();
+        document.getElementById("msg").textContent = name
+          ? `Hello, ${name}!`
+          : "Hello!";
+      });
+    </script>
